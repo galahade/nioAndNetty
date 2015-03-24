@@ -10,12 +10,11 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Reactor implements Runnable {
-
+public class Reactor_State implements Runnable {
 	final Selector selector;
 	final ServerSocketChannel serverSocket;
 
-	Reactor(int port) throws IOException {
+	Reactor_State(int port) throws IOException {
 		selector = Selector.open();
 		serverSocket = ServerSocketChannel.open();
 		serverSocket.bind(new InetSocketAddress(port));
