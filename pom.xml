@@ -20,7 +20,13 @@
 		<org.mybatis.mybatis-spring.version>1.2.2</org.mybatis.mybatis-spring.version>
 		<net.sf.ehcache.version>2.6.9</net.sf.ehcache.version>
 	</properties>
-	
+	<dependencies>
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>5.0.0.Alpha2</version>
+		</dependency>
+	</dependencies>
 	
 	<build>
 		<plugins>

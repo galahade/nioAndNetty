@@ -94,30 +94,30 @@ public class Reactor_State implements Runnable {
 		public void run() {
 
 			try {
-				if (state == READING)
-					read();
-				else if (state == SENDING)
-					send();
+				socket.read(input);
+				if (inputIsComplete()) {
+					process();
+					sk.attach(new Sender());
+					sk.interestOps(SelectionKey.OP_WRITE);
+					sk.selector().wakeup();
+			}
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 
 		}
-
-		void read() throws IOException {
-			socket.read(input);
-			if (inputIsComplete()) {
-				process();
-				state = SENDING;
-				sk.interestOps(SelectionKey.OP_WRITE);
+		
+		class Sender implements Runnable {
+			public void run() {
+				try {
+					socket.write(output);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				if(outputIsComplete())
+					sk.cancel();
 			}
-		}
-
-		void send() throws IOException {
-			socket.write(output);
-			if (outputIsComplete())
-				sk.cancel();
-			;
 		}
 
 	}
