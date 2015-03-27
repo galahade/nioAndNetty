@@ -27,7 +27,7 @@ public class WorldClockClientInitializer extends ChannelInitializer<SocketChanne
 		p.addLast(new ProtobufDecoder(WorldClockProtocol.Locations.getDefaultInstance()));
 		p.addLast(new ProtobufVarint32LengthFieldPrepender());
 		p.addLast(new ProtobufEncoder());
-		p.addLast(handlers)
+		p.addLast(new WorldClockClientHandler());
 	}
 
 }
