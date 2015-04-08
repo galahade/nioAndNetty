@@ -39,8 +39,10 @@ public class WorldClockClientHandler extends SimpleChannelInboundHandler<LocalTi
                 setContinent(Continent.valueOf(components[0].toUpperCase())).
                 setCity(components[1]).build());
         }
-
-        channel.writeAndFlush(builder.build());
+        
+        Locations locations = builder.build();
+        
+        channel.writeAndFlush(locations);
 
         LocalTimes localTimes;
         boolean interrupted = false;

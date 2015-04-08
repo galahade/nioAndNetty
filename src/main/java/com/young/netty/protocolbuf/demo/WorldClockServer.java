@@ -34,7 +34,7 @@ public final class WorldClockServer {
 			b.group(bossGroup,workerGroup)
 			.channel(NioServerSocketChannel.class)
 			.handler(new LoggingHandler(LogLevel.INFO))
-			//.childHandler(new WorldClockClientInitializer(sslCtx))
+			.childHandler(new WorldClockServerInitializer(sslCtx))
 			;
 			b.bind(PORT).sync().channel().closeFuture().sync();
 		} finally {
